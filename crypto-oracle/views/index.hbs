@@ -1,0 +1,41 @@
+<header class='w3-container w3-deep-purple'>
+    <h1>{{title}}</h1>
+    <h4 class='w3-opacity'>{{subtitle}}</h4>
+</header>
+<section class='w3-container' style='max-width: 90%; min-width: 1000px; margin: 2.5em auto'>
+    <div class='w3-padding'>
+        {{#table}}
+        <table class='w3-table w3-bordered'>
+            <thead>
+                <tr>
+                    <h4 class='w3-padding'>{{title}}</h4>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each rows}}
+                <tr>
+                    <td class='w3-panel w3-light-grey w3-topbar w3-border-deep-purple' colspan='5'>
+                        <span class='w3-opacity w3-text-deep-purple w3-large'><b>{{title}}</b></span>
+                    </td>
+                </tr>
+                <tr>
+                    {{#each ../header}}
+                    <th class='w3-text-gray'>{{this}}</th>
+                    {{/each}}
+                </tr>
+                {{#each paths}}
+                <tr>
+                    <td class='w3-code' style='width: 200px'>{{path}}</td>
+                    <td>{{method}}</td>
+                    <td class='w3-code'>{{params}}</td>
+                    <td class='w3-code'>{{response}}</td>
+                    <td style='max-width: 400px; min-width: 350px; {{#if @last}} padding-bottom: 4em; {{/if}}'>
+                        {{description}}</td>
+                </tr>
+                {{/each}}
+                {{/each}}
+            </tbody>
+        </table>
+        {{/table}}
+    </div>
+</section>
