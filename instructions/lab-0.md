@@ -1,8 +1,8 @@
 # **Git basics - Lab 0** <!-- omit in toc -->
 
-U nastavku je dan taksativan popis _git_ naredbi koje će vam biti korisne tijekom rada s lokalnim Git repozitorijem.
+> **VAŽNO**: Konfigurirajte Git tako da ignorira javno dostupne biblioteke (npr., `node_modules` direktorij u slučaju Node.js-a). Koristite `.gitignore` datoteku za tu svrhu.
 
-> Ukoliko uočite grešku ili problem s nekom naredbom molimo da nam javite.
+U nastavku je dan taksativan popis _git_ naredbi koje će vam biti korisne tijekom rada s lokalnim Git repozitorijem.
 
 - [Cloning a remote repository](#cloning-a-remote-repository)
 - [Listing and changing branches](#listing-and-changing-branches)
@@ -11,6 +11,8 @@ U nastavku je dan taksativan popis _git_ naredbi koje će vam biti korisne tijek
 - [Committing changes (locally)](#committing-changes-locally)
 - [Pushing/sending changes to the remote repository](#pushingsending-changes-to-the-remote-repository)
 - [Checking commit history](#checking-commit-history)
+- [Ignoring files (`.gitignore`)](#ignoring-files-gitignore)
+- [Git Cheat Sheets](#git-cheat-sheets)
 
 ## Cloning a remote repository
 
@@ -19,7 +21,7 @@ U nastavku je dan taksativan popis _git_ naredbi koje će vam biti korisne tijek
 $ git clone http://10.0.1.134/2019/mario_cagalj
 ```
 
-> VAŽNO: Primjetite da koristimo fiksnu IP adresu `10.0.1.134` (IP adresa Git server), kao i prefiks `2019` (studentski repozitoriji grupirani su u projekt/grupu `2019`).
+> VAŽNO: Primjetite da koristimo fiksnu IP adresu `10.0.1.134` (IP adresa Git servera), kao i prefiks `2019` (studentski repozitoriji grupirani su u projekt/grupu `2019`).
 
 ## Listing and changing branches
 
@@ -29,7 +31,7 @@ $ git branch
 * master
 ```
 
-U kloniranom repozitoriju inicijalno je aktivan `master branch`:
+U kloniranom repozitoriju inicijalno je aktivna `master` grana (_branch_):
 
 ```bash
 ~/mario_cagalj (master)
@@ -128,3 +130,14 @@ $ git status
 ~/mario_cagalj (vjezba01)
 $ git log
 ```
+
+## Ignoring files (`.gitignore`)
+
+Često ste u situaciji da određene datoteke ne želite slati (_push_-ati) na udaljeni repozitorij (npr., datoteka može sadržavati povjerljive informacije, logove, ili u repozitorij ne želite stavljati javno dostupne biblioteke/module).
+
+Ako želite da Git ignorira određene datoteke i direktorije kreirajte `.gitignore` datoteku u vašem repozitoriju i u istoj jednostavno navedite resurse koje želite ignorirati.
+
+## Git Cheat Sheets
+
+- [GitHub Cheat Sheet](https://services.github.com/on-demand/downloads/github-git-cheat-sheet/)
+- [GitLab Cheat Sheet](https://about.gitlab.com/images/press/git-cheat-sheet.pdf)
