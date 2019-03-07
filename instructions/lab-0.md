@@ -2,6 +2,14 @@
 
 > **VAŽNO**: Konfigurirajte Git tako da ignorira javno dostupne biblioteke (npr., `node_modules` direktorij u slučaju Node.js-a). Koristite `.gitignore` datoteku za tu svrhu.
 
+<br/>
+<p align="center">
+<img src="../img/git-transport.png" alt="Git Data Tansport Commands" width="650px" height="auto"/>
+<br>
+<em>Git Data Transport Commands</em>
+</p>
+<br/>
+
 U nastavku je dan taksativan popis _git_ naredbi koje će vam biti korisne tijekom rada s lokalnim Git repozitorijem.
 
 - [Cloning a remote repository](#cloning-a-remote-repository)
