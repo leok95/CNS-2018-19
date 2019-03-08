@@ -147,6 +147,6 @@ Ako želite da Git ignorira određene datoteke i direktorije kreirajte `.gitigno
 
 ## Git Cheat Sheets
 
-- [Visual Git Reference](https://about.gitlab.com/images/press/git-cheat-sheet.pdf) - **izvrsna referenca!!!**
+- [Visual Git Reference](https://marklodato.github.io/visual-git-guide/index-en.html) - **izvrsna referenca!!!**
 - [GitHub Cheat Sheet](https://services.github.com/on-demand/downloads/github-git-cheat-sheet/)
 - [GitLab Cheat Sheet](https://about.gitlab.com/images/press/git-cheat-sheet.pdf)
