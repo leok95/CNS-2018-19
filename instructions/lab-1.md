@@ -6,7 +6,7 @@ U okviru vježbe upoznajemo se s osnovnim sigurnosnim prijetnjama i ranjivostima
 
 Zadatak studenta je dešifrirati tekst/vic enkriptiran AES šifrom u CBC enkripcijskom modu. Ključ koji je potreban za dekripciju student treba otkriti u interakciji s odgovarajućim virtualnim serverom (kojeg kolokvijalno zovemo **_crypto oracle_**). Šifrirani tekst student može dohvatiti konzumiranjem REST API-ja koji je dokumentiran i dostupan na studentovom virtualnom web serveru. Student zadatak rješava u nekoliko koraka kako je navedeno u nastavku.
 
-1. Otkriti IP adresu vlastitog virtualnog servera. Iskoristite činjnicu da centralni server periodično šalje svim računalima na podmreži `10.0.15.0/24` korisne informacije (_multicast_ promet). Računalima se dodjeljuju dinamičke IP adrese (putem DHCP servera) pa su IP adrese podložne promjenama.
+1. Otkriti IP adresu vlastitog virtualnog servera. Iskoristite činjnicu da centralni server periodično šalje svim računalima na podmreži `10.0.0.0/20` korisne informacije (_multicast_ promet). Računalima se dodjeljuju dinamičke IP adrese (putem DHCP servera) pa su IP adrese podložne promjenama.
 
 2. Izvršiti ARP spoofing napad (_Kali Linux_) i otkriti tajni _cookie_ iz kojeg se izvodi dekripcijski ključ za dekripciju šifriranog teksta. Centralni server periodično šalje studentovom serveru `POST` zahtjeve na `/arp` (_unicast_ promet). Studentov server po primitku ovog zahtjeva vraća tajni _cookie_. Sva komunikacija ide u _čisto_ (nije zaštićena).
 
