@@ -26,7 +26,7 @@ U nastavku je dan taksativan popis _git_ naredbi koje će vam biti korisne tijek
 
 ```bash
 # Clone repository of Mario Cagalj (mario_cagalj)
-$ git clone http://10.0.1.134/2019/mario_cagalj
+$ git clone http://10.0.1.134/2019/mario_cagalj.git
 ```
 
 > VAŽNO: Primjetite da koristimo fiksnu IP adresu `10.0.1.134` (IP adresa Git servera), kao i prefiks `2019` (studentski repozitoriji grupirani su u projekt/grupu `2019`).
