@@ -21,7 +21,7 @@ U ovom GitHub repozitoriju profesor će objavljivati upute, dijelove koda, konfi
 - [Lab 0 - Git basics](/instructions/lab-0.md)
 - [Lab 1 - ARP spoofing](/instructions/lab-1.md)
 - [Lab 2 - ECB mode vulnerabilities](/instructions/lab-2.md)
-- Lab 3 - CBC mode and predictable IVs
+- [Lab 3 - CBC mode and predictable initialization vectors (IV)](/instructions/lab-3.md)
 - Lab 4 - CTR mode and repeated IVs/counter
 - Lab 5 - Asymmetric crypto: RSA signatures and DH key exchange
 - Lab 6 - Securing end-2-end communication
