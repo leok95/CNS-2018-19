@@ -7,7 +7,7 @@ _Cipher Block Chaining (CBC)_ **probabilistički** je način enkripcije poruka p
 Kod CBC enkripcijskog moda _plantext_ blokovi se ulančavaju (eng. _chaining_) kako je prikazano na slici u nastavku; prisjetite se, u ECB modu pojedini blokovi enkriptiraju se neovisno.
 
 <p align="center">
-<img src="../img/cbc.PNG" alt="CBC encryption" width="400px" height="auto"/>
+<img src="../img/cbc.PNG" alt="CBC encryption" width="450px" height="auto"/>
 <br><br>
 <em>Enkripcija u CBC modu</em>
 </p>
@@ -46,16 +46,9 @@ U Node.js-u, primjenom modula `axios` navedeni zahtjev možete napraviti kako sl
 ```js
 // Recall, you have to wrap this into a function marked as 'async'
 const response = await axios.post("http://10.0.15.x/cbc/iv", {
-  plaintext: "30303030"
+  plaintext: "plaintext"
 });
 ```
-
-> **VAŽNO**: Primjetite u prethodnom primjeru da _plaintext_ šaljete u _hex_ formatu a ne kao _utf8_ ili _ascii_; 0000 (utf8) = 30303030 (hex). U Node.js-u konverziju iz _utf8_ u _hex_ možete napraviti vrlo jednostavno korištenjem klase [Buffer](https://nodejs.org/api/buffer.html):
->
-> ```js
-> // Converting utf8 string "0000" to hex string "30303030"
-> Buffer.from("0000").toString("hex");
-> ```
 
 _Crypto oracle_ (vaš REST server) uzima vaš _plaintext_, dodaje _padding_ prema PKCS#7 standardu (vidjeti primjere u nastavku), te enkriptira `plaintext + padding` u CBC modu tajnim 256 bitnim ključem (`aes-256-cbc`) i vraća vam odgovarajući _ciphertext_ zajedno s odgovarajućim inicijalizacijskim vektorom (IV).
 
@@ -111,4 +104,56 @@ Ovaj _ciphertext_ (_challenge_) i IV rezultat su enkripcije tajne riječi u CBC 
    # plaintext size: 13 byte
    plaintext: 00:01:02:03:04:05:06:07:08:09:0a:0b:0c
    w/padding: 00:01:02:03:04:05:06:07:08:09:0a:0b:0c:03:03:03
+   ```
+
+4. **VAŽNO:** Za uspješno rješavanje ove vježbe trebate nekakav mehanizam za manipuliranje binarnim podacima (npr., trebate zbrojiti dva 128-bitna vektora po modulu 2 - `xor` operacija). Također, trebate mehanizam za konverziju stringova u heksadecimalnu reprezentaciju. Node.js definira klasu [Buffer](https://nodejs.org/api/buffer.html) koja vam pojednostavljuje rad s binarnim nizovima podataka, kao i konverziju podataka iz jednog formata u drugi. U nastavku je dano nekoliko primjera:
+
+   ```js
+   Buffer.from("Hello world!")
+   <Buffer 48 65 6c 6c 6f 20 77 6f 72 6c 64 21>
+
+   Buffer.from("Hello world!").toString('hex')
+   '48656c6c6f20776f726c6421'
+
+   Buffer.from("00")
+   <Buffer 30 30>
+
+   Buffer.from("00", "hex")
+   <Buffer 00>
+
+   Buffer.from("1a2c3c2a9658864a6545174945f59583", "hex")
+   <Buffer 1a 2c 3c 2a 96 58 86 4a 65 45 17 49 45 f5 95 83>
+   ```
+
+   ```js
+   //============================================
+   // XOR-ing two 128-bit binary vectors
+   //============================================
+   const buffer1 = Buffer.from("00000000000000000000000000000001", "hex")
+   <Buffer 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01>
+
+   const buffer2 = Buffer.from("00000000000000000000000000000010", "hex")
+   <Buffer 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 10>
+
+   // this buffer (of size 16 bytes) will hold the result
+   bufferResult = Buffer.alloc(16)
+   <Buffer 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00>
+
+   const number11 = buffer1.readUInt32BE(0);  // 1st  4 bytes
+   const number12 = buffer1.readUInt32BE(4);  // next 4 bytes
+   const number13 = buffer1.readUInt32BE(8);  // next 4 bytes
+   const number14 = buffer1.readUInt32BE(12); // last 4 bytes
+
+   const number21 = buffer2.readUInt32BE(0);  // 1st  4 bytes
+   const number22 = buffer2.readUInt32BE(4);  // next 4 bytes
+   const number23 = buffer2.readUInt32BE(8);  // next 4 bytes
+   const number24 = buffer2.readUInt32BE(12); // last 4 bytes
+
+   bufferResult.writeUInt32BE(number11 ^ number21, 0);  // 1st  4 bytes
+   bufferResult.writeUInt32BE(number12 ^ number22, 4);  // next 4 bytes
+   bufferResult.writeUInt32BE(number13 ^ number23, 8);  // next 4 bytes
+   bufferResult.writeUInt32BE(number14 ^ number24, 12); // last 4 bytes
+
+   // print bufferResult
+   <Buffer 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 11>
    ```
