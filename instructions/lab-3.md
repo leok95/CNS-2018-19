@@ -190,15 +190,15 @@ Ovaj _ciphertext_ (_challenge_) i IV rezultat su enkripcije tajne riječi u CBC 
    //============================================
    // How to use incrementIV()
    //============================================
-   const current_iv = Buffer.from("1889e18a86942219d16d14eeaf50bff4", "hex");
+   const iv = Buffer.from("1889e18a86942219d16d14eeaf50bff4", "hex");
    const before = Buffer.alloc(16);
-   current_iv.copy(before);
+   iv.copy(before);
 
-   // increment current_iv by 4
-   incrementIv(current_iv_test, 4);
+   // increment iv by 4
+   incrementIv(iv, 4);
 
    console.log("Before:", before);
-   console.log(" After:", current_iv_test);
+   console.log(" After:", iv);
    ```
 
    ```js
