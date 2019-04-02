@@ -184,7 +184,7 @@ Ovaj _ciphertext_ (_challenge_) i IV rezultat su enkripcije tajne riječi u CBC 
      const carry = Math.floor(sum / MAX_32_INTEGER);
 
      bigint.writeUInt32BE(reminder, offset);
-     incrementUInt32By(bigint, carry, offset - 4);
+     incrementIv(bigint, carry, offset - 4);
    }
 
    //============================================
