@@ -199,6 +199,8 @@ Ovaj _ciphertext_ (_challenge_) i IV rezultat su enkripcije tajne riječi u CBC 
 
    console.log("Before:", before);
    console.log(" After:", iv);
+   // Before: <Buffer 18 89 e1 8a 86 94 22 19 d1 6d 14 ee af 50 bf f4>
+   //  After: <Buffer 18 89 e1 8a 86 94 22 19 d1 6d 14 ee af 50 bf f8>
    ```
 
    ```js
