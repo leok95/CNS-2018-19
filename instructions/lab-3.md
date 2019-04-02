@@ -139,20 +139,9 @@ Ovaj _ciphertext_ (_challenge_) i IV rezultat su enkripcije tajne riječi u CBC 
    bufferResult = Buffer.alloc(16)
    <Buffer 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00>
 
-   const number11 = buffer1.readUInt32BE(0);  // 1st  4 bytes
-   const number12 = buffer1.readUInt32BE(4);  // next 4 bytes
-   const number13 = buffer1.readUInt32BE(8);  // next 4 bytes
-   const number14 = buffer1.readUInt32BE(12); // last 4 bytes
-
-   const number21 = buffer2.readUInt32BE(0);  // 1st  4 bytes
-   const number22 = buffer2.readUInt32BE(4);  // next 4 bytes
-   const number23 = buffer2.readUInt32BE(8);  // next 4 bytes
-   const number24 = buffer2.readUInt32BE(12); // last 4 bytes
-
-   bufferResult.writeUInt32BE(number11 ^ number21, 0);  // 1st  4 bytes
-   bufferResult.writeUInt32BE(number12 ^ number22, 4);  // next 4 bytes
-   bufferResult.writeUInt32BE(number13 ^ number23, 8);  // next 4 bytes
-   bufferResult.writeUInt32BE(number14 ^ number24, 12); // last 4 bytes
+   for (let i = 0; i < buffer1.length; i++) {
+     bufferResult[i] = buffer1[i] ^ buffer2[i]
+   }
 
    // print bufferResult
    <Buffer 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 11>
