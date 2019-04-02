@@ -157,3 +157,86 @@ Ovaj _ciphertext_ (_challenge_) i IV rezultat su enkripcije tajne riječi u CBC 
    // print bufferResult
    <Buffer 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 11>
    ```
+
+5. Nekoliko _helper_ funkcija (funkcija za uvećavanje 128-bitnih inicijalizacijskih vektora i funkcija koja implementira PKCS#7 _padding_).
+
+   ```js
+   /**
+    * Increment a 128-bit integer by the given addend;
+    * the max addend is MAX_SAFE_INTEGER in JS, i.e., (2^53 - 1).
+    * If addend is not provided it defaults to 1.
+    */
+   const MAX_32_INTEGER = Math.pow(2, 32) - 1;
+
+   function incrementIv(bigint, addend = 1, offset = 12) {
+     // assert(Number.isSafeInteger(addend), "Addend not a safe integer");
+
+     if (offset < 0) return;
+
+     const current = bigint.readUInt32BE(offset);
+     const sum = current + addend;
+
+     if (sum <= MAX_32_INTEGER) {
+       return bigint.writeUInt32BE(sum, offset);
+     }
+
+     const reminder = sum % (MAX_32_INTEGER + 1);
+     const carry = Math.floor(sum / MAX_32_INTEGER);
+
+     bigint.writeUInt32BE(reminder, offset);
+     incrementUInt32By(bigint, carry, offset - 4);
+   }
+
+   //============================================
+   // How to use incrementIV()
+   //============================================
+   const current_iv = Buffer.from("1889e18a86942219d16d14eeaf50bff4", "hex");
+   const before = Buffer.alloc(16);
+   current_iv.copy(before);
+
+   // increment current_iv by 4
+   incrementIv(current_iv_test, 4);
+
+   console.log("Before:", before);
+   console.log(" After:", current_iv_test);
+   ```
+
+   ```js
+   /**
+    * Pad the given plaintext according to PKCS#7;
+    * please note that this implementation supports
+    * only plaintexts of length up to 16 bytes.
+    */
+   function addPadding(plaintext) {
+     // assert(
+     //   plaintext.length <= 16,
+     //   `Plaintext block exceeds 16 bytes (${plaintext.length})`
+     // );
+
+     const pad = 16 - plaintext.length;
+     const sourceBuffer = Buffer.from(plaintext);
+     const targetBuffer =
+       pad > 0 ? Buffer.alloc(16, pad) : Buffer.alloc(32, 16);
+     sourceBuffer.copy(targetBuffer, 0, 0);
+
+     return targetBuffer.toString("hex");
+   }
+
+   //============================================
+   // How to use addPadding()
+   //============================================
+   addPadding("0");
+   // gives 300f0f0f0f0f0f0f0f0f0f0f0f0f0f0f
+
+   addPadding("01");
+   // gives 30310e0e0e0e0e0e0e0e0e0e0e0e0e0e
+
+   addPadding("0123");
+   // gives 303132330c0c0c0c0c0c0c0c0c0c0c0c
+
+   addPadding("012345678901234");
+   // gives 30313233343536373839303132333401
+
+   addPadding("0123456789012345");
+   // gives 3031323334353637383930313233343510101010101010101010101010101010
+   ```
