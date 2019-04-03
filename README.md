@@ -27,3 +27,4 @@ U ovom GitHub repozitoriju profesor će objavljivati upute, dijelove koda, konfi
 - Lab 6 - Securing end-2-end communication
 - Lab 7 - Certificate authorities (CAs) and TLS protocol
 - Lab 8 - SSH tunneling
+- [**Running the REST server (_crypto oracle_) locally**](/instructions/intro.md)
