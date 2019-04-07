@@ -17,7 +17,7 @@ CTR mod siguran je način enkripcije (osigurava povjerljivost podataka) ali uz v
 
 U ovoj vježi pokazat ćemo ranjivost CTR enkripcijskog moda u slučaju kad nije ispunjena pretpostavka o neponavljanju brojača (_counter_-a). Kao i kod CBC moda, student će implementirati _chosen-plaintext attack (CPA)_, odnosno slati upite (tj. _plaintext_) _crypto oracle_-u koji će iste enkriptirati u CTR modu i potom vraćati enkriptirani _ciphertext_ natrag studentu.
 
-Ranjivost _crypto oracle_ u ovoj vježbi proizlazi iz činjenice da se **brojač bira (nasumično) iz vrlog ograničenog/malog skupa brojeva**. Posljedica opisanog načina generiranja brojača za CTR mod je ta da će se nakon određenog broja enkripcija brojač ponaviti što napadaču omogućuje dekripciju _ciphertext_-a bez poznavanja enkripcijskog ključa. Prosječan broj poruka koje treba enkriptirati prije ponavljanja brojača student može procjeniti uvidom u skriptu [crypto_oracle/controllers/ctr.controller.js](/crypto_oracle/controllers/ctr.controller.js).
+Ranjivost _crypto oracle_ u ovoj vježbi proizlazi iz činjenice da se **brojač bira (nasumično) iz vrlog ograničenog/malog skupa brojeva**. Posljedica opisanog načina generiranja brojača za CTR mod je ta da će se nakon određenog broja enkripcija brojač ponaviti što napadaču omogućuje dekripciju _ciphertext_-a bez poznavanja enkripcijskog ključa. Prosječan broj poruka koje treba enkriptirati prije ponavljanja brojača student može procjeniti uvidom u skriptu [crypto-oracle/controllers/ctr.controller.js](/crypto-oracle/controllers/ctr.controller.js).
 
 Zadatak studenta je iskoristiti gore opisani propust u _crypto oracle_-u i dekriptirati vic o Chuck Norris-u koji je ovaj put enkriptiran u CTR modu.
 
