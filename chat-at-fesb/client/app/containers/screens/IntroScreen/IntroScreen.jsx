@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Server } from "config";
 import { connect } from "react-redux";
 import { serverConnect } from "app/redux/actions/serverActions.js";
 import ServerForm from "app/components/ServerForm/ServerForm.jsx";
@@ -18,7 +19,7 @@ class IntroScreen extends Component {
           nickText={"Nickname"}
           buttonText={"Join"}
           onConnect={serverConnect}
-          defaults={{ host: "localhost", port: 6968 }}
+          defaults={{ host: "localhost", port: Server.port }}
         />
       </div>
     );

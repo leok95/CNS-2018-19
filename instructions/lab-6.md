@@ -32,7 +32,7 @@ Navedena zaštita će se implementirati prema principu _**end-2-end**_; drugim r
 
    Na ovaj način pokrećemo _webpack development server_ koji će posluživati klijentsku aplikaciju. [_Webpack_](https://webpack.js.org) koristi `webpack.config.js` skriptu za konfiguraciju procesa generiranja (eng. _bundling_) klijentske aplikacije. Server zaustavljate s `Ctrl + C`.
 
-   Uvidom u `index.html` datoteku (`chat-at-fesb\app\index.html`) možete vidjeti da se klijentska aplikacija `app.js` uistinu poslužuje s razvojnog servera (_webpack-dev-server_) pokrenutog na lokalnom računalu:
+   Uvidom u `index.html` datoteku (`chat-at-fesb\client\app\index.html`) možete vidjeti da se klijentska aplikacija `app.js` uistinu poslužuje s razvojnog servera (_webpack-dev-server_) pokrenutog na lokalnom računalu:
 
    ```html
    <script src="http://localhost:5000/bundle.js"></script>
@@ -116,11 +116,11 @@ Implementirati _end-2-end_ zaštitu poruka koje klijenti međusobno razmjenjuju.
 
 1. Preduvjet za zaštitu poruka jesu dijeljeni enkripcijski ključevi između klijenata. U Chat@FESB aplikaciji enkripcijski ključevi će se generirati na osnovu dijeljenih šifri. Aplikacija predviđa polja u koje student može unosti šifre. Student će koristiti sporu _password based key derivation function 2 (PBKDF2)_ za generiranje potrebnih simetričnih ključeva iz dijeljene tajne šifre.
 
-   Student treba modificirati datoteku `securityActions.js` (`chat-at-fesb\app\redux\actions`) na način opisan u komentaru u navedenoj datoteci. Ako ste ispravno napravili ovaj korak, aplikacija će generirane ključeve automatski pohranjivati u odgovarajuća polja u _Redux storu_-u. Možete koristite _Developer tools_ prozor u aplikaciji za praćenje logova aplikacije.
+   Student treba modificirati datoteku `securityActions.js` (`chat-at-fesb\client\app\redux\actions`) na način opisan u komentaru u navedenoj datoteci. Ako ste ispravno napravili ovaj korak, aplikacija će generirane ključeve automatski pohranjivati u odgovarajuća polja u _Redux storu_-u. Možete koristite _Developer tools_ prozor (`View > Toggle Developer Tools`) u aplikaciji za praćenje logova aplikacije.
 
-2. U ovom koraku student treba implementirati zaštitu povjerljivosti odlaznih poruka. Odlazne poruke procesiraju se u datoteci `handleMsgOut.js` (`chat-at-fesb\app\redux\middleware\serverHandlers`); vidjeti komentare u datoteci.
+2. U ovom koraku student treba implementirati zaštitu povjerljivosti odlaznih poruka. Odlazne poruke procesiraju se u datoteci `handleMsgOut.js` (`chat-at-fesb\client\app\redux\middleware\serverHandlers`); vidjeti komentare u datoteci.
 
-   Za enkripciju/zaštitu povjerljivosti poruka koristite CBC mod sa slučajno generiranim inicijalizacijskim vektorom. U direktoriju `chat-at-fesb\app\services\security` u datotekama `ciphers.js` i `CryptoProvider.js` konfigurirano je nekoliko enkripcijskih modova, uključujući CBC. Student može koristiti navedene funkcije ako prethodno uveze datoteku `CryptoProvider.js` (`import <path_to_script>`).
+   Za enkripciju/zaštitu povjerljivosti poruka koristite CBC mod sa slučajno generiranim inicijalizacijskim vektorom. U direktoriju `chat-at-fesb\client\app\services\security` u datotekama `ciphers.js` i `CryptoProvider.js` konfigurirano je nekoliko enkripcijskih modova, uključujući CBC. Student može koristiti navedene funkcije ako prethodno uveze datoteku `CryptoProvider.js` (`import <path_to_script>`).
 
    Kao što je vidljivo iz koda (`handleMsgOut.js`) _chat_ poruke imaju sljedeći format:
 
@@ -167,7 +167,7 @@ Implementirati _end-2-end_ zaštitu poruka koje klijenti međusobno razmjenjuju.
    }
    ```
 
-4. U ovom koraku student treba implementirati provjeru autentičnosti primljenih/dolaznih poruka. Primljene poruke procesiraju se u datoteci `handleMsgIn.js` (`chat-at-fesb\app\redux\middleware\serverHandlers`); vidjeti komentare u datoteci.
+4. U ovom koraku student treba implementirati provjeru autentičnosti primljenih/dolaznih poruka. Primljene poruke procesiraju se u datoteci `handleMsgIn.js` (`chat-at-fesb\client\app\redux\middleware\serverHandlers`); vidjeti komentare u datoteci.
 
    Student treba provjeriti integritet primljene poruke na osnovu:
 
@@ -194,7 +194,7 @@ Implementirati _end-2-end_ zaštitu poruka koje klijenti međusobno razmjenjuju.
 
    _"One option is to generate the nonce at random and consider the probability of duplicates. AES-GCM takes a 96-bit nonce and NIST says that you can only encrypt 2<sup>32</sup> messages under a single key if using random nonces...by the birthday paradox we have roughly a 2<sup>-33</sup> chance of repeating the same nonce and NIST drew the line there. That probability might seem either high or low to you. It's pretty small in absolute terms and, unlike a work factor, an attacker can't spend resources against it, but it's a very long way from the safety margins that we usually use in cryptography."_
 
-   U nastavku je prikazana dekripcijska GCM funkcija iz datoteke `ciphers.js` (`chat-at-fesb\app\services\security`):
+   U nastavku je prikazana dekripcijska GCM funkcija iz datoteke `ciphers.js` (`chat-at-fesb\client\app\services\security`):
 
    ```JavaScript
    function decrypt_GCM({
