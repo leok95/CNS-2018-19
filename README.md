@@ -25,6 +25,6 @@ U ovom GitHub repozitoriju profesor će objavljivati upute, dijelove koda, konfi
 - [Lab 4 - CTR mode and repeated IVs/counter](/instructions/lab-4.md)
 - [Lab 5 - Asymmetric crypto: RSA signatures and DH key exchange](/instructions/lab-5.md)
 - [Lab 6 - Securing end-2-end communication](/instructions/lab-6.md)
-- Lab 7 - Certificate authorities (CAs) and TLS protocol
+- [Lab 7 - Certificate authorities (CAs) and TLS protocol](/instructions/lab-7.md)
 - Lab 8 - SSH tunneling
 - [**Running the REST server (_crypto oracle_) locally**](/instructions/intro.md)
