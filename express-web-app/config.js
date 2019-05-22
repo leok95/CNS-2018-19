@@ -14,7 +14,8 @@ module.exports = {
       useMongoClient: true,
       user: process.env.MONGO_USER || "test",
       pass: process.env.MONGO_PASS || "testPass"
-    }
+    },
+    reconnectAfter: 3000
   },
 
   //-----------------------------
