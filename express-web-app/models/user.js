@@ -96,7 +96,7 @@ UserSchema.methods.verifyCertificate = function(req) {
         user.username
       }" FAILED with error: ${req.socket.authorizationError}`
     );
-    error.status = "cert";
+    error.status = "CERT";
     reject(error);
   });
 };

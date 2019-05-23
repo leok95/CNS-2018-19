@@ -24,6 +24,14 @@ module.exports = {
   SECURE_SERVER: HTTPS,
 
   //-----------------------------
+  // Login policies:
+  //       - BASIC
+  //       - ALL_OR_NOTHING
+  //       - CERT
+  //-----------------------------
+  LOGIN_POLICY: process.env.LOGIN_POLICY || "BASIC",
+
+  //-----------------------------
   // HTTP SERVER CONFIG DATA
   //-----------------------------
   HTTP: {
